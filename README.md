@@ -1,4 +1,4 @@
-# NumberNine CMS Faker
+# NumberNine CMS Common
 
 Shared infrastructure among NumberNine ecosystem
 
