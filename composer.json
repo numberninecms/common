@@ -15,7 +15,10 @@
     "require": {
         "php": "^7.4",
         "symfony/dependency-injection": "^5.1",
-        "symfony/http-kernel": "^5.1"
+        "symfony/finder": "^5.1",
+        "symfony/http-kernel": "^5.1",
+        "symfony/string": "^5.1",
+        "symfony/translation": "^5.1"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest"
@@ -23,6 +26,11 @@
     "autoload": {
         "psr-4": {
             "NumberNine\\Common\\": "src/"
-        }
+        },
+        "files": [
+            "src/Util/ArrayUtil/functions.php",
+            "src/Util/ConfigUtil/functions.php",
+            "src/Util/StringUtil/functions.php"
+        ]
     }
 }
