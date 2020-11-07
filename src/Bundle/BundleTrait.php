@@ -13,10 +13,14 @@ namespace NumberNine\Common\Bundle;
 use LogicException;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use Symfony\Component\HttpKernel\Bundle\Bundle as BaseBundle;
 
-abstract class Bundle extends BaseBundle
+trait BundleTrait
 {
+    /** @var ExtensionInterface|null|false */
+    protected $extension;
+    abstract public function getName(): string;
+    abstract protected function createContainerExtension();
+
     protected function getAlias(): string
     {
         $basename = preg_replace('/Bundle$/', '', $this->getName());
