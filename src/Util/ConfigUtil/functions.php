@@ -34,3 +34,37 @@ function get_file_upload_max_size(): int
 
     return $maxSize;
 }
+
+/**
+ * Inserts or replace an environment variable in a given file
+ * @return false|int
+ */
+function file_put_env_variable(string $filename, string $envVariable, string $value)
+{
+    if (!file_exists($filename)) {
+        return file_put_contents($filename, sprintf("%s=%s\n", $envVariable, $value));
+    }
+
+    $content = file_get_contents($filename);
+
+    if (preg_match('@^\s*(?!#)\b'.preg_quote($envVariable).'\b\s*=@simU', $content)) {
+        $content = preg_replace('@(\b'.preg_quote($envVariable).'\b\s*=\s*?)(.*)(#.*)?(?:\n|$)@simU', sprintf('$1%s $3', $value), $content);
+        return file_put_contents($filename, $content);
+    }
+
+    return file_put_contents($filename, sprintf("%s=%s\n", $envVariable, $value), FILE_APPEND);
+}
+
+/**
+ * Checks if an environment variable exists in a given file
+ */
+function file_env_variable_exists(string $filename, string $envVariable): bool
+{
+    if (!file_exists($filename)) {
+        return false;
+    }
+
+    $content = file_get_contents($filename);
+
+    return preg_match('@^\s*(?!#)\b'.preg_quote($envVariable).'\b\s*=@simU', $content) === 1;
+}
