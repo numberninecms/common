@@ -57,7 +57,7 @@ function file_put_env_variable(string $filename, string $envVariable, string $va
         return file_put_contents($filename, $content);
     }
 
-    return file_put_contents($filename, sprintf("%s=%s\n", $envVariable, $value), FILE_APPEND);
+    return file_put_contents($filename, sprintf("\n%s=%s\n", $envVariable, $value), FILE_APPEND);
 }
 
 /**
