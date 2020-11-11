@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the NumberNine package.
  *
@@ -34,13 +35,19 @@ trait BundleTrait
 
             if (null !== $extension) {
                 if (!$extension instanceof ExtensionInterface) {
-                    throw new LogicException(sprintf('Extension %s must implement Symfony\Component\DependencyInjection\Extension\ExtensionInterface.', get_class($extension)));
+                    throw new LogicException(sprintf(
+                        'Extension %s must implement ' .
+                        'Symfony\Component\DependencyInjection\Extension\ExtensionInterface.',
+                        get_class($extension)
+                    ));
                 }
 
                 if ($this->getAlias() !== $extension->getAlias()) {
                     throw new LogicException(
                         sprintf(
-                            'Users will expect the alias of the default extension of a bundle to be the underscored version of the bundle name ("%s"). You can override "Bundle::getContainerExtension()" if you want to use "%s" or another alias.',
+                            'Users will expect the alias of the default extension of a bundle to be the underscored ' .
+                            'version of the bundle name ("%s"). You can override "Bundle::getContainerExtension()" ' .
+                            'if you want to use "%s" or another alias.',
                             $this->getAlias(),
                             $extension->getAlias()
                         )

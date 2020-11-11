@@ -1,7 +1,7 @@
 {
     "name": "numberninecms/common",
-    "description": "Shared infrastructure among NumberNine ecosystem",
     "type": "library",
+    "description": "Shared infrastructure among NumberNine ecosystem",
     "license": "MIT",
     "authors": [
         {
@@ -9,9 +9,6 @@
             "email": "williamarin.dev@gmail.com"
         }
     ],
-    "config": {
-        "sort-packages": true
-    },
     "require": {
         "php": "^7.4",
         "symfony/dependency-injection": "^5.1",
@@ -21,7 +18,20 @@
         "symfony/translation": "^5.1"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
+        "ergebnis/composer-normalize": "^2.11",
+        "friendsoftwig/twigcs": "^4.0",
+        "nikic/php-parser": "^4.10",
+        "php-parallel-lint/php-parallel-lint": "^1.2",
+        "phpro/grumphp": "^1.1",
+        "phpstan/phpstan": "^0.12.54",
+        "phpstan/phpstan-phpunit": "^0.12.16",
+        "phpstan/phpstan-symfony": "^0.12.11",
+        "phpunit/phpunit": "^9.4",
+        "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "config": {
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
