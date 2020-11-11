@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the NumberNine package.
  *
@@ -45,10 +46,14 @@ function file_put_env_variable(string $filename, string $envVariable, string $va
         return file_put_contents($filename, sprintf("%s=%s\n", $envVariable, $value));
     }
 
-    $content = file_get_contents($filename);
+    $content = (string)file_get_contents($filename);
 
-    if (preg_match('@^\s*(?!#)\b'.preg_quote($envVariable).'\b\s*=@simU', $content)) {
-        $content = preg_replace('@(\b'.preg_quote($envVariable).'\b\s*=\s*?)(.*)(#.*)?(?:\n|$)@simU', sprintf('$1%s $3', $value), $content);
+    if (preg_match('@^\s*(?!#)\b' . preg_quote($envVariable) . '\b\s*=@simU', $content)) {
+        $content = preg_replace(
+            '@(\b' . preg_quote($envVariable) . '\b\s*=\s*?)(.*)(#.*)?(?:\n|$)@simU',
+            sprintf('$1%s $3', $value),
+            $content
+        );
         return file_put_contents($filename, $content);
     }
 
@@ -64,7 +69,7 @@ function file_env_variable_exists(string $filename, string $envVariable): bool
         return false;
     }
 
-    $content = file_get_contents($filename);
+    $content = (string)file_get_contents($filename);
 
-    return preg_match('@^\s*(?!#)\b'.preg_quote($envVariable).'\b\s*=@simU', $content) === 1;
+    return preg_match('@^\s*(?!#)\b' . preg_quote($envVariable) . '\b\s*=@simU', $content) === 1;
 }

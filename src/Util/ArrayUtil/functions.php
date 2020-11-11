@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the NumberNine package.
  *
@@ -118,8 +119,13 @@ function array_push_deep(array &$array, $value): void
  * @param string $valueWrapper
  * @return string
  */
-function array_implode_associative(array $array, string $glue = ';', string $keyValueSeparator = '=', string $keyWrapper = '', string $valueWrapper = ''): string
-{
+function array_implode_associative(
+    array $array,
+    string $glue = ';',
+    string $keyValueSeparator = '=',
+    string $keyWrapper = '',
+    string $valueWrapper = ''
+): string {
     return implode(
         $glue,
         array_map(
@@ -144,8 +150,13 @@ function array_implode_associative(array $array, string $glue = ';', string $key
  * @param mixed|null $formattedValue
  * @param bool $strictNull
  */
-function array_set_if_value_exists(array &$array, string $key, $value, $formattedValue = null, bool $strictNull = false): void
-{
+function array_set_if_value_exists(
+    array &$array,
+    string $key,
+    $value,
+    $formattedValue = null,
+    bool $strictNull = false
+): void {
     if (($strictNull && $value !== null) || (!$strictNull && $value)) {
         $array[$key] = $formattedValue ?? $value;
     }
