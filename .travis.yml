@@ -1,0 +1,19 @@
+os: linux
+dist: bionic
+language: php
+
+php:
+    - 7.4
+
+env:
+    - COMPOSER_VERSION=2
+
+cache:
+    directories:
+        - ~/.cache/composer
+
+install:
+    - composer install
+
+script:
+    - ./vendor/bin/grumphp run --no-interaction
