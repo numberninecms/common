@@ -3,8 +3,6 @@ grumphp:
         phpstan:
             configuration: './phpstan.neon'
             level: 8
-        twigcs:
-            path: './src/'
         phpunit: ~
         phpcs:
             standard: PSR12

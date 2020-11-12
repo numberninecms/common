@@ -39,39 +39,6 @@ function array_merge_recursive_fixed(array $array1, array $array2): array
     return $array1;
 }
 
-
-/**
- * Recursively merge arrays.
- *
- * Merge two arrays as array_merge_recursive do, but instead of converting values to arrays when keys are same
- * replaces value from first array with value from second
- *
- * @param array $first
- * @param array $second
- *
- * @return array
- */
-function array_merge_recursive_distinct(array $first, array $second): array
-{
-    foreach ($second as $index => $value) {
-        if (is_int($index)) {
-            $first[] = $value;
-        } elseif (!array_key_exists($index, $first)) {
-            $first[$index] = $value;
-        } elseif (is_array($value)) {
-            if (is_array($first[$index])) {
-                $first[$index] = array_merge_recursive_distinct($first[$index], $value);
-            } else {
-                $first[$index] = $value;
-            }
-        } else {
-            $first[$index] = $value;
-        }
-    }
-
-    return $first;
-}
-
 /**
  * Push a value in a nested array that doesn't necessarily exist
  *
@@ -80,9 +47,9 @@ function array_merge_recursive_distinct(array $first, array $second): array
  * with `$array = []`
  *
  * and `$value = 3`
- *          ArrayTool::arrayPushDeep($array, $value, 'key1', 2, 'key3');
+ *          array_push_deep($array, $value, 'key1', 2, 'key3');
  * results in:
- *          ['key1' => [2 => 'key3' => [3]]]
+ *          ['key1' => [2 => ['key3' => [3]]]]
  *
  * @param array $array
  * @param mixed $value
