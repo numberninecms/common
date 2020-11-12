@@ -17,6 +17,7 @@
         <testsuite name="NumberNine Common Test Suite">
             <directory>tests</directory>
             <directory>tests/Util/ConfigUtil/EnvFileTests.php</directory>
+            <directory>tests/Util/StringUtil/HumanReadableSizeToIntTests.php</directory>
         </testsuite>
     </testsuites>
 </phpunit>

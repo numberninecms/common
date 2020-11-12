@@ -28,44 +28,44 @@ class EnvFileTests extends TestCase
     public function testEnvFileVariableDoesntExist(): void
     {
         file_put_contents($this->filename, '');
-        $this->assertFalse(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
+        self::assertFalse(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
     }
 
     public function testEnvFileVariableDoesntExistIfCommented(): void
     {
         file_put_contents($this->filename, '# MY_ENV_VARIABLE=some_value');
-        $this->assertFalse(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
+        self::assertFalse(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
     }
 
     public function testEnvFileVariableExists(): void
     {
         file_put_contents($this->filename, 'MY_ENV_VARIABLE=some_value');
-        $this->assertTrue(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
+        self::assertTrue(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
     }
 
     public function testEnvFileVariableIsWritten(): void
     {
         file_put_contents($this->filename, '');
-        $this->assertNotEquals(false, file_put_env_variable($this->filename, 'MY_ENV_VARIABLE', 'some_value'));
-        $this->assertTrue(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
-        $this->assertStringContainsString('MY_ENV_VARIABLE=some_value', (string)file_get_contents($this->filename));
+        self::assertNotEquals(false, file_put_env_variable($this->filename, 'MY_ENV_VARIABLE', 'some_value'));
+        self::assertTrue(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
+        self::assertStringContainsString('MY_ENV_VARIABLE=some_value', (string)file_get_contents($this->filename));
     }
 
     public function testEnvFileVariableIsWrittenIfCommented(): void
     {
         file_put_contents($this->filename, '# MY_ENV_VARIABLE=some_value');
-        $this->assertNotEquals(false, file_put_env_variable($this->filename, 'MY_ENV_VARIABLE', 'some_new_value'));
-        $this->assertTrue(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
-        $this->assertStringContainsString('# MY_ENV_VARIABLE=some_value', (string)file_get_contents($this->filename));
-        $this->assertStringContainsString('MY_ENV_VARIABLE=some_new_value', (string)file_get_contents($this->filename));
+        self::assertNotEquals(false, file_put_env_variable($this->filename, 'MY_ENV_VARIABLE', 'some_new_value'));
+        self::assertTrue(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
+        self::assertStringContainsString('# MY_ENV_VARIABLE=some_value', (string)file_get_contents($this->filename));
+        self::assertStringContainsString('MY_ENV_VARIABLE=some_new_value', (string)file_get_contents($this->filename));
     }
 
     public function testEnvFileVariableIsOverwritten(): void
     {
         file_put_contents($this->filename, 'MY_ENV_VARIABLE=some_value');
-        $this->assertNotEquals(false, file_put_env_variable($this->filename, 'MY_ENV_VARIABLE', 'some_new_value'));
-        $this->assertTrue(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
-        $this->assertStringNotContainsString('MY_ENV_VARIABLE=some_value', (string)file_get_contents($this->filename));
-        $this->assertStringContainsString('MY_ENV_VARIABLE=some_new_value', (string)file_get_contents($this->filename));
+        self::assertNotEquals(false, file_put_env_variable($this->filename, 'MY_ENV_VARIABLE', 'some_new_value'));
+        self::assertTrue(file_env_variable_exists($this->filename, 'MY_ENV_VARIABLE'));
+        self::assertStringNotContainsString('MY_ENV_VARIABLE=some_value', (string)file_get_contents($this->filename));
+        self::assertStringContainsString('MY_ENV_VARIABLE=some_new_value', (string)file_get_contents($this->filename));
     }
 }

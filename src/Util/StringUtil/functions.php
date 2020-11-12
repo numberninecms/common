@@ -11,6 +11,8 @@
 
 namespace NumberNine\Common\Util\StringUtil;
 
+use InvalidArgumentException;
+
 /**
  * Converts a human readable size to number in byte.
  *
@@ -18,11 +20,21 @@ namespace NumberNine\Common\Util\StringUtil;
  */
 function human_readable_size_to_int(string $size): int
 {
+    if (strpos(trim($size), '-') === 0) {
+        throw new InvalidArgumentException('Number cannot be negative.');
+    }
+
     $unit = preg_replace('/[^bkmgtpezy]/i', '', $size);
     $size = preg_replace('/[^0-9.]/', '', $size);
 
     if ($unit) {
-        return (int)round((float)$size * (1024 ** (int)stripos('bkmgtpezy', $unit[0])));
+        $result = (int)round((float)$size * (1024 ** (int)stripos('bkmgtpezy', $unit[0])));
+
+        if ($size > 0 && $result <= 0) {
+            throw new \OverflowException('Resulting number is too big and cannot be handled by PHP.');
+        }
+
+        return $result;
     }
 
     return (int)round((float)$size);
