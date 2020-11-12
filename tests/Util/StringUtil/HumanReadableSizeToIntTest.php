@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Util\StringUtil;
+namespace NumberNine\Common\Tests\Util\StringUtil;
 
 use InvalidArgumentException;
 use OverflowException;
@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 use function NumberNine\Common\Util\StringUtil\human_readable_size_to_int;
 
-class HumanReadableSizeToIntTests extends TestCase
+class HumanReadableSizeToIntTest extends TestCase
 {
     public function testOnlyPositiveNumberAllowed(): void
     {

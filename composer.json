@@ -42,5 +42,10 @@
             "src/Util/ConfigUtil/functions.php",
             "src/Util/StringUtil/functions.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NumberNine\\Common\\Tests\\": "tests/"
+        }
     }
 }

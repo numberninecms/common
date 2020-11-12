@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Util\ConfigUtil;
+namespace NumberNine\Common\Tests\Util\ConfigUtil;
 
 use PHPUnit\Framework\TestCase;
 
 use function NumberNine\Common\Util\ConfigUtil\file_env_variable_exists;
 use function NumberNine\Common\Util\ConfigUtil\file_put_env_variable;
 
-class EnvFileTests extends TestCase
+class EnvFileTest extends TestCase
 {
     private string $filename;
 
