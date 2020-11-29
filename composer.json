@@ -32,6 +32,11 @@
     "config": {
         "sort-packages": true
     },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.1.x-dev"
+        }
+    },
     "autoload": {
         "psr-4": {
             "NumberNine\\Common\\": "src/"
@@ -46,5 +51,6 @@
         "psr-4": {
             "NumberNine\\Common\\Tests\\": "tests/"
         }
-    }
+    },
+    "minimum-stability": "stable"
 }
