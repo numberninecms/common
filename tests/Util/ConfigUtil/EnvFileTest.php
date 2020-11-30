@@ -68,4 +68,14 @@ class EnvFileTest extends TestCase
         self::assertStringNotContainsString('MY_ENV_VARIABLE=some_value', (string)file_get_contents($this->filename));
         self::assertStringContainsString('MY_ENV_VARIABLE=some_new_value', (string)file_get_contents($this->filename));
     }
+
+    public function testFileDoesNotGetAltered(): void
+    {
+        $initialContent = "MY_ENV_VARIABLE=some_value\n\nANOTHER_VARIABLE=other_value\n\nTHIRD=third_value";
+        file_put_contents($this->filename, $initialContent);
+        file_put_env_variable($this->filename, 'MY_ENV_VARIABLE', 'some_value');
+        file_put_env_variable($this->filename, 'ANOTHER_VARIABLE', 'other_value');
+        file_put_env_variable($this->filename, 'THIRD', 'third_value');
+        self::assertEquals($initialContent, file_get_contents($this->filename));
+    }
 }

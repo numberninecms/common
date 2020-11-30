@@ -49,9 +49,17 @@ function file_put_env_variable(string $filename, string $envVariable, string $va
     $content = (string)file_get_contents($filename);
 
     if (preg_match('@^\s*(?!#)\b' . preg_quote($envVariable) . '\b\s*=@simU', $content)) {
-        $content = preg_replace(
-            '@(\b' . preg_quote($envVariable) . '\b\s*=\s*?)(.*)(#.*)?(?:\n|$)@simU',
-            sprintf('$1%s $3', $value),
+        $content = preg_replace_callback(
+            '@(\b' . preg_quote($envVariable) . '\b\s*=\s*?)(.*)(#.*)?(\n|$)@simU',
+            function ($matches) use ($value) {
+                return sprintf(
+                    "%s%s%s%s",
+                    $matches[1],
+                    $value,
+                    $matches[3] ? ' ' . $matches[3] : '',
+                    $matches[4],
+                );
+            },
             $content
         );
         return file_put_contents($filename, $content);
