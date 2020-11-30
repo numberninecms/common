@@ -16,7 +16,7 @@ use ReflectionException;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-use function NumberNine\Common\Util\ArrayUtil\array_merge_recursive_distinct;
+use function NumberNine\Common\Util\ArrayUtil\array_merge_recursive_fixed;
 
 trait MergeConfigurationTrait
 {
@@ -37,7 +37,7 @@ trait MergeConfigurationTrait
             $originalConfig[] = [];
         }
 
-        $mergedConfig = array_merge_recursive_distinct($originalConfig[0], $config);
+        $mergedConfig = array_merge_recursive_fixed($originalConfig[0], $config);
         $originalConfig[0] = $mergedConfig;
 
         $this->setExtensionConfig($container, $name, $originalConfig);

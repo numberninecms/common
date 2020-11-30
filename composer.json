@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "symfony/dependency-injection": "^5.1",
         "symfony/finder": "^5.1",
         "symfony/http-kernel": "^5.1",
@@ -19,7 +19,6 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
-        "friendsoftwig/twigcs": "^4.0",
         "nikic/php-parser": "^4.10",
         "php-parallel-lint/php-parallel-lint": "^1.2",
         "phpro/grumphp": "^1.1",
@@ -33,6 +32,11 @@
     "config": {
         "sort-packages": true
     },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.1.x-dev"
+        }
+    },
     "autoload": {
         "psr-4": {
             "NumberNine\\Common\\": "src/"
@@ -42,5 +46,11 @@
             "src/Util/ConfigUtil/functions.php",
             "src/Util/StringUtil/functions.php"
         ]
-    }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NumberNine\\Common\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
 }

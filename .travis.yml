@@ -1,9 +1,10 @@
 os: linux
-dist: bionic
+dist: focal
 language: php
 
 php:
     - 7.4
+    - nightly
 
 env:
     - COMPOSER_VERSION=2
