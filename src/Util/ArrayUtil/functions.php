@@ -26,7 +26,10 @@ function array_merge_recursive_fixed(array $array1, array $array2): array
         if (isset($array1[$key])) {
             if (!is_array($array1[$key])) {
                 $array1[$key] = $value;
-            } elseif (array_keys($array1[$key]) === range(0, count($array1[$key]) - 1)) {
+            } elseif (
+                array_keys($array1[$key]) === range(0, count($array1[$key]) - 1)
+                && !is_array($array1[$key][0])
+            ) {
                 $array1[$key] = array_unique(array_merge($array1[$key], $value));
             } else {
                 $array1[$key] = array_merge_recursive_fixed($array1[$key], $value);
