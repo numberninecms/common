@@ -17,7 +17,7 @@ use function NumberNine\Common\Util\ArrayUtil\array_merge_recursive_fixed;
 
 class ArrayMergeRecursiveFixedTest extends TestCase
 {
-    public function testArrayMergeRecursiveFixed(): void
+    public function testRegularScalarMerge(): void
     {
         $default = [
             'scalar1' => 1,
@@ -47,6 +47,24 @@ class ArrayMergeRecursiveFixedTest extends TestCase
                     'scalar' => "B",
                     'array_scalar' => [0 => 1, 1 => 2, 2 => 3, 4 => 4, 5 => 5],
                 ],
+            ],
+            array_merge_recursive_fixed($default, $override)
+        );
+    }
+
+    public function testNumericKeysArrayMerge(): void
+    {
+        $default = [
+            'array_scalar' => [0 => ['a' => 'b'], 1 => ['b' => 'c'], 2 => ['c' => 'd']],
+        ];
+
+        $override = [
+            'array_scalar' => [0 => ['a' => 'b'], 2 => ['c' => 'd'], 3 => ['d' => 'e']],
+        ];
+
+        self::assertEquals(
+            [
+                'array_scalar' => [0 => ['a' => 'b'], 1 => ['b' => 'c'], 2 => ['c' => 'd'], 3 => ['d' => 'e']],
             ],
             array_merge_recursive_fixed($default, $override)
         );
