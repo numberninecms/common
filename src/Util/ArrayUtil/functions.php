@@ -212,6 +212,11 @@ function array_map_recursive(callable $callable, array $array, string $childrenK
     );
 }
 
+/**
+ * Unset keys recursively in a given array
+ * @param array $array
+ * @param string $keyToUnset
+ */
 function unset_recursive(array &$array, string $keyToUnset): void
 {
     unset($array[$keyToUnset]);
@@ -219,6 +224,24 @@ function unset_recursive(array &$array, string $keyToUnset): void
     foreach ($array as &$value) {
         if (is_array($value)) {
             unset_recursive($value, $keyToUnset);
+        }
+    }
+}
+
+/**
+ * Rename a key in an array
+ * @param array $array
+ * @param string $keyToRename
+ * @param string $newName
+ * @param string|null $newValue
+ */
+function array_key_rename(array &$array, string $keyToRename, string $newName, ?string $newValue = null): void
+{
+    if (array_key_exists($keyToRename, $array)) {
+        $array[$newName] = $newValue ?? $array[$keyToRename];
+
+        if ($newName !== $keyToRename) {
+            unset($array[$keyToRename]);
         }
     }
 }

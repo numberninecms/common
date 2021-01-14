@@ -52,5 +52,8 @@
             "NumberNine\\Common\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "scripts": {
+        "test": "vendor/bin/grumphp run --no-interaction"
+    }
 }
