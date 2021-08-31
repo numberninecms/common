@@ -15,9 +15,6 @@ use BadFunctionCallException;
 
 /**
  * Acts like array_merge_recursive except that scalars are correctly overridden
- * @param array $array1
- * @param array $array2
- * @return array
  * @link https://stackoverflow.com/a/36366886/1159013
  */
 function array_merge_recursive_fixed(array $array1, array $array2): array
@@ -54,7 +51,6 @@ function array_merge_recursive_fixed(array $array1, array $array2): array
  * results in:
  *          ['key1' => [2 => ['key3' => [3]]]]
  *
- * @param array $array
  * @param mixed $value
  */
 function array_push_deep(array &$array, $value): void
@@ -81,13 +77,6 @@ function array_push_deep(array &$array, $value): void
 /**
  * Implode an associative array.
  * If a value is an array, its values are imploded with pipe as separator.
- *
- * @param array $array
- * @param string $glue
- * @param string $keyValueSeparator
- * @param string $keyWrapper
- * @param string $valueWrapper
- * @return string
  */
 function array_implode_associative(
     array $array,
@@ -114,11 +103,8 @@ function array_implode_associative(
 
 /**
  * Sets a value or formatted value associated to a key to an array, only if the value exists
- * @param array $array
- * @param string $key
  * @param mixed $value
  * @param mixed|null $formattedValue
- * @param bool $strictNull
  */
 function array_set_if_value_exists(
     array &$array,
@@ -134,8 +120,6 @@ function array_set_if_value_exists(
 
 /**
  * Checks if an array is an associative array
- * @param array $array
- * @return bool
  */
 function is_associative_array(array $array): bool
 {
@@ -147,10 +131,7 @@ function is_associative_array(array $array): bool
 }
 
 /**
- * @param array $array
- * @param string $childrenKey
- * @return int
- * @link https://stackoverflow.com/a/262944/1159013
+ * Finds the depth of an array given children key
  */
 function array_depth(array $array, string $childrenKey = 'children'): int
 {
@@ -158,7 +139,7 @@ function array_depth(array $array, string $childrenKey = 'children'): int
 
     foreach ($array as $value) {
         if (!empty($value[$childrenKey])) {
-            $depth = array_depth($value[$childrenKey]) + 1;
+            $depth = array_depth($value[$childrenKey], $childrenKey) + 1;
 
             if ($depth > $maxDepth) {
                 $maxDepth = $depth;
@@ -171,9 +152,6 @@ function array_depth(array $array, string $childrenKey = 'children'): int
 
 /**
  * Checks if all values of an array exists in another array
- * @param array $needles
- * @param array $haystack
- * @return bool
  */
 function in_array_all(array $needles, array $haystack): bool
 {
@@ -182,9 +160,6 @@ function in_array_all(array $needles, array $haystack): bool
 
 /**
  * Checks if any of the values of an array exists in another array
- * @param array $needles
- * @param array $haystack
- * @return bool
  */
 function in_array_any(array $needles, array $haystack): bool
 {
@@ -193,10 +168,6 @@ function in_array_any(array $needles, array $haystack): bool
 
 /**
  * Apply array_map recursively if the given $childrenKey exists
- * @param callable $callable
- * @param array $array
- * @param string $childrenKey
- * @return array
  */
 function array_map_recursive(callable $callable, array $array, string $childrenKey = 'children'): array
 {
@@ -214,8 +185,6 @@ function array_map_recursive(callable $callable, array $array, string $childrenK
 
 /**
  * Unset keys recursively in a given array
- * @param array $array
- * @param string $keyToUnset
  */
 function unset_recursive(array &$array, string $keyToUnset): void
 {
@@ -230,10 +199,6 @@ function unset_recursive(array &$array, string $keyToUnset): void
 
 /**
  * Rename a key in an array
- * @param array $array
- * @param string $keyToRename
- * @param string $newName
- * @param string|null $newValue
  */
 function array_key_rename(array &$array, string $keyToRename, string $newName, ?string $newValue = null): void
 {
