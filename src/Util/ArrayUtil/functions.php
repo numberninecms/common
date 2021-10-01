@@ -40,6 +40,38 @@ function array_merge_recursive_fixed(array $array1, array $array2): array
 }
 
 /**
+ * Recursively merge arrays.
+ *
+ * Merge two arrays as array_merge_recursive do, but instead of merging values given a key, it appends
+ * the second array's value to the first.
+ *
+ * @param array $first
+ * @param array $second
+ *
+ * @return array
+ */
+function array_merge_recursive_distinct(array $first, array $second): array
+{
+    foreach ($second as $index => $value) {
+        if (is_int($index)) {
+            $first[] = $value;
+        } elseif (!array_key_exists($index, $first)) {
+            $first[$index] = $value;
+        } elseif (is_array($value)) {
+            if (is_array($first[$index])) {
+                $first[$index] = array_merge_recursive_distinct($first[$index], $value);
+            } else {
+                $first[$index] = $value;
+            }
+        } else {
+            $first[$index] = $value;
+        }
+    }
+
+    return $first;
+}
+
+/**
  * Push a value in a nested array that doesn't necessarily exist
  *
  * Usage :
