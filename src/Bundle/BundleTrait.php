@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 trait BundleTrait
 {
-    /** @var ExtensionInterface|null|false */
+    /** @var ExtensionInterface|null */
     protected $extension;
     abstract public function getName(): string;
     abstract protected function createContainerExtension();
@@ -28,7 +28,7 @@ trait BundleTrait
         return Container::underscore((string)$basename);
     }
 
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         if (null === $this->extension) {
             $extension = $this->createContainerExtension();
@@ -55,11 +55,9 @@ trait BundleTrait
                 }
 
                 $this->extension = $extension;
-            } else {
-                $this->extension = false;
             }
         }
 
-        return $this->extension ?: null;
+        return $this->extension;
     }
 }
