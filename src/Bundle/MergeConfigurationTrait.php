@@ -16,29 +16,28 @@ use ReflectionException;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+use function NumberNine\Common\Util\ArrayUtil\array_merge_recursive_distinct;
 use function NumberNine\Common\Util\ArrayUtil\array_merge_recursive_fixed;
 
 trait MergeConfigurationTrait
 {
     /**
      * Merge configuration into one config
-     *
-     * @param ContainerBuilder $container
-     * @param string $name
-     * @param array $config
-     *
-     * @throws RuntimeException
-     * @throws ReflectionException
      */
-    protected function mergeConfigIntoOne(ContainerBuilder $container, string $name, array $config = []): void
-    {
+    protected function mergeConfigIntoOne(
+        ContainerBuilder $container,
+        string $name,
+        array $config = [],
+        bool $reverse = false
+    ): void {
         $originalConfig = $container->getExtensionConfig($name);
         if (!count($originalConfig)) {
             $originalConfig[] = [];
         }
 
-        $mergedConfig = array_merge_recursive_fixed($originalConfig[0], $config);
-        $originalConfig[0] = $mergedConfig;
+        $originalConfig[0] = $reverse
+            ? array_merge_recursive_distinct($originalConfig[0], $config)
+            : array_merge_recursive_distinct($config, $originalConfig[0]);
 
         $this->setExtensionConfig($container, $name, $originalConfig);
     }
@@ -49,10 +48,6 @@ trait MergeConfigurationTrait
      * Usable for extensions which requires to have just one config.
      * http://api.symfony.com/2.3/Symfony/Component/Config/Definition/Builder/ArrayNodeDefinition.html
      * #method_disallowNewKeysInSubsequentConfigs
-     * @param ContainerBuilder $container
-     * @param string $name
-     * @param array $config
-     * @throws ReflectionException
      */
     public function setExtensionConfig(ContainerBuilder $container, string $name, array $config = []): void
     {
