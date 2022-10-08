@@ -70,7 +70,7 @@ final class ExtendedSlugger implements ExtendedSluggerInterface, LocaleAwareInte
         }
     }
 
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->defaultLocale;
     }
