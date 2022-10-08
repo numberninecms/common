@@ -1,8 +1,8 @@
 {
     "name": "numberninecms/common",
-    "type": "library",
     "description": "Shared infrastructure among NumberNine ecosystem",
     "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "William Arin",
@@ -22,16 +22,15 @@
         "nikic/php-parser": "^4.10",
         "php-parallel-lint/php-parallel-lint": "^1.2",
         "phpro/grumphp": "^1.1",
-        "phpstan/phpstan": "^0.12.54",
-        "phpstan/phpstan-phpunit": "^0.12.16",
-        "phpstan/phpstan-symfony": "^0.12.11",
+        "phpstan/phpstan": "^1.8.8",
+        "phpstan/phpstan-phpunit": "^1.1.1",
+        "phpstan/phpstan-symfony": "^1.2.14",
         "phpunit/phpunit": "^9.4",
         "roave/security-advisories": "dev-latest",
         "squizlabs/php_codesniffer": "^3.5"
     },
-    "config": {
-        "sort-packages": true
-    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "NumberNine\\Common\\": "src/"
@@ -47,8 +46,13 @@
             "NumberNine\\Common\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "phpro/grumphp": true
+        },
+        "sort-packages": true
+    },
     "scripts": {
         "test": "vendor/bin/grumphp run --no-interaction"
     }
